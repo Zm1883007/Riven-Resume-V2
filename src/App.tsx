@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Mail, MessageCircle, X, Languages, ArrowUpRight } from 'lucide-react';
-
-const PROFILE_URL = 'https://raw.githubusercontent.com/Zm1883007/Riven-Resume/v2-redesign/public/profile.jpg';
-const WECHAT_QR_URL = 'https://raw.githubusercontent.com/Zm1883007/Riven-Resume/v2-redesign/public/wechat-qr.png';
+import { AnimatePresence, motion } from 'motion/react';
+import { ArrowUpRight, Languages, Mail, MessageCircle, X } from 'lucide-react';
 
 const TRANSLATIONS = {
   en: {
@@ -88,6 +85,8 @@ const TRANSLATIONS = {
   }
 };
 
+const ACCENT = '#00A1D6';
+
 export default function App() {
   const [lang, setLang] = useState<'en' | 'zh'>('zh');
   const [showWechat, setShowWechat] = useState(false);
@@ -98,142 +97,228 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0b0d10] text-[#f4f5f7] selection:bg-[#00A1D6]/30 selection:text-white">
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0b0d10]/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="text-sm font-semibold tracking-[0.18em] text-white">HAN WENBO</div>
-          <button onClick={() => setLang(lang === 'en' ? 'zh' : 'en')} className="flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white">
-            <Languages className="h-4 w-4" />
-            {lang === 'en' ? '中文' : 'English'}
-          </button>
+    <div className="min-h-screen bg-[#f2f2ef] text-[#111111] selection:bg-[#00A1D6] selection:text-white">
+      <header className="sticky top-0 z-40 border-b border-black/20 bg-[#f2f2ef]/95 backdrop-blur-md">
+        <div className="mx-auto grid max-w-[1320px] grid-cols-12 items-center px-5 py-4 md:px-8">
+          <div className="col-span-7 text-[11px] font-bold uppercase tracking-[0.24em] md:col-span-4">Han Wenbo / Resume</div>
+          <div className="col-span-5 flex justify-end md:col-span-8">
+            <button
+              onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
+              className="flex items-center gap-2 border-l border-black/20 pl-4 text-xs font-semibold uppercase tracking-[0.12em] transition hover:text-[#00A1D6]"
+            >
+              <Languages className="h-4 w-4" />
+              {lang === 'en' ? '中文' : 'English'}
+            </button>
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-6">
-        <section className="grid min-h-[78vh] items-center gap-12 border-b border-white/10 py-16 md:grid-cols-[1.25fr_.75fr] md:py-24">
-          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
-            <div className="mb-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#00A1D6]">
-              <span className="h-px w-8 bg-[#00A1D6]" />
-              {t.tags}
+      <main className="mx-auto max-w-[1320px] px-5 md:px-8">
+        <section className="grid grid-cols-12 border-b border-black py-8 md:min-h-[720px] md:py-12">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+            className="col-span-12 grid grid-cols-12 md:col-span-8"
+          >
+            <div className="col-span-12 mb-12 flex items-start justify-between border-t border-black pt-3 md:col-span-11 md:mb-20">
+              <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A1D6]">Portfolio / 2026</div>
+              <div className="max-w-[260px] text-right text-[11px] font-medium uppercase leading-5 tracking-[0.12em] text-black/55">{t.tags}</div>
             </div>
-            <p className="mb-2 text-lg text-zinc-500">{t.greeting}</p>
-            <h1 className="text-6xl font-semibold tracking-[-0.055em] text-white md:text-8xl">{t.name}</h1>
-            <div className="mt-7 flex flex-wrap gap-x-3 gap-y-2 text-sm md:text-base">
-              {t.roles.map((role, i) => (
-                <span key={role} className="flex items-center gap-3 text-zinc-300">
-                  {role}{i < t.roles.length - 1 && <span className="text-zinc-700">/</span>}
-                </span>
+
+            <div className="col-span-12 md:col-span-11">
+              <p className="mb-3 text-sm font-medium uppercase tracking-[0.18em] text-black/45">{t.greeting}</p>
+              <h1 className="max-w-[900px] text-[19vw] font-black leading-[0.8] tracking-[-0.075em] sm:text-[15vw] md:text-[118px] lg:text-[148px]">
+                {t.name}
+              </h1>
+
+              <div className="mt-10 grid grid-cols-2 gap-x-5 gap-y-3 border-t border-black/25 pt-4 md:grid-cols-4">
+                {t.roles.map((role, index) => (
+                  <div key={role} className="border-l border-black/20 pl-3">
+                    <div className="mb-1 text-[10px] font-bold text-[#00A1D6]">0{index + 1}</div>
+                    <div className="text-sm font-semibold leading-5">{role}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-10 grid grid-cols-12 border-t border-black pt-5">
+                <p className="col-span-12 max-w-2xl text-lg font-medium leading-8 md:col-span-8 md:text-xl">{t.description}</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 18 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+            className="col-span-12 mt-10 md:col-span-4 md:mt-0 md:border-l md:border-black md:pl-6"
+          >
+            <div className="grid h-full grid-rows-[auto_1fr_auto]">
+              <div className="flex items-center justify-between border-t border-black py-3 text-[10px] font-bold uppercase tracking-[0.2em]">
+                <span>Portrait</span>
+                <span style={{ color: ACCENT }}>HW / 01</span>
+              </div>
+              <img src="/profile.jpg" alt="Han Wenbo" className="min-h-[420px] h-full w-full object-cover object-center" />
+              <div className="grid grid-cols-2 border-t border-black py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-black/55">
+                <span>Shanghai / China</span>
+                <span className="text-right">Open to work</span>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        <section className="grid grid-cols-12 border-b border-black py-14 md:py-20">
+          <div className="col-span-12 mb-10 md:col-span-3 md:mb-0">
+            <div className="sticky top-24">
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#00A1D6]">01 / Metrics</div>
+              <h2 className="mt-3 max-w-[220px] text-4xl font-black leading-none tracking-[-0.045em] md:text-5xl">{t.dataTitle}</h2>
+            </div>
+          </div>
+          <div className="col-span-12 md:col-span-9 md:border-l md:border-black md:pl-6">
+            <p className="mb-10 max-w-xl text-sm font-medium leading-6 text-black/55">{t.dataSubtitle}</p>
+            <div className="grid grid-cols-2 border-l border-t border-black md:grid-cols-4">
+              {t.stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  className="min-h-[220px] border-b border-r border-black p-4 md:min-h-[260px] md:p-5"
+                >
+                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#00A1D6]">0{index + 1}</div>
+                  <div className="mt-12 break-words text-4xl font-black leading-none tracking-[-0.055em] md:text-5xl">{stat.value}</div>
+                  <div className="mt-5 text-sm font-bold">{stat.label}</div>
+                  <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-black/45">{stat.desc}</div>
+                </motion.div>
               ))}
             </div>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-zinc-400">{t.description}</p>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.08 }} className="justify-self-center md:justify-self-end">
-            <div className="relative w-64 md:w-80">
-              <div className="absolute -left-4 -top-4 h-16 w-16 border-l border-t border-[#00A1D6]/70" />
-              <div className="absolute -bottom-4 -right-4 h-16 w-16 border-b border-r border-white/20" />
-              <img src="/profile.jpg" alt="Han Wenbo" className="aspect-[4/5] w-full object-cover grayscale-[18%]" />
-            </div>
-          </motion.div>
-        </section>
-
-        <section className="border-b border-white/10 py-20 md:py-24">
-          <div className="mb-12 grid gap-6 md:grid-cols-[.7fr_1.3fr] md:items-end">
-            <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#00A1D6]">01 / Metrics</p>
-              <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{t.dataTitle}</h2>
-            </div>
-            <p className="max-w-xl text-zinc-500 md:justify-self-end md:text-right">{t.dataSubtitle}</p>
-          </div>
-          <div className="grid border-y border-white/10 md:grid-cols-4">
-            {t.stats.map((stat, i) => (
-              <motion.div key={stat.label} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="border-b border-white/10 px-0 py-7 md:border-b-0 md:border-r md:px-6 md:last:border-r-0">
-                <div className="text-3xl font-semibold tracking-tight text-white md:text-4xl">{stat.value}</div>
-                <div className="mt-3 text-sm font-medium text-zinc-300">{stat.label}</div>
-                <div className="mt-1 text-xs uppercase tracking-[0.14em] text-zinc-600">{stat.desc}</div>
-              </motion.div>
-            ))}
           </div>
         </section>
 
-        <section className="border-b border-white/10 py-20 md:py-24">
-          <div className="mb-14 grid gap-6 md:grid-cols-[.7fr_1.3fr] md:items-end">
-            <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#00A1D6]">02 / Experience</p>
-              <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{t.journeyTitle}</h2>
+        <section className="grid grid-cols-12 border-b border-black py-14 md:py-20">
+          <div className="col-span-12 mb-10 md:col-span-3 md:mb-0">
+            <div className="sticky top-24">
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#00A1D6]">02 / Experience</div>
+              <h2 className="mt-3 max-w-[230px] text-4xl font-black leading-none tracking-[-0.045em] md:text-5xl">{t.journeyTitle}</h2>
             </div>
-            <p className="max-w-xl text-zinc-500 md:justify-self-end md:text-right">{t.journeySubtitle}</p>
           </div>
-          <div>
-            {timeline.map((item, i) => (
-              <motion.article key={`${item.group}-${item.title}`} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="grid gap-4 border-t border-white/10 py-8 md:grid-cols-[150px_1fr] md:gap-10">
-                <div>
-                  <div className="text-sm font-semibold text-[#00A1D6]">{item.year}</div>
-                  <div className="mt-2 text-xs uppercase tracking-[0.14em] text-zinc-600">{item.group}</div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white md:text-2xl">{item.title}</h3>
-                  <p className="mt-3 max-w-3xl leading-7 text-zinc-400">{item.description}</p>
-                </div>
-              </motion.article>
-            ))}
+          <div className="col-span-12 md:col-span-9 md:border-l md:border-black md:pl-6">
+            <p className="mb-8 max-w-xl text-sm font-medium leading-6 text-black/55">{t.journeySubtitle}</p>
+            <div className="border-t border-black">
+              {timeline.map((item, index) => (
+                <motion.article
+                  key={`${item.group}-${item.title}`}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.04 }}
+                  className="grid grid-cols-12 border-b border-black py-6 md:py-8"
+                >
+                  <div className="col-span-3 pr-4 md:col-span-2">
+                    <div className="text-base font-black text-[#00A1D6]">{item.year}</div>
+                    <div className="mt-2 text-[9px] font-bold uppercase leading-4 tracking-[0.15em] text-black/45">{item.group}</div>
+                  </div>
+                  <div className="col-span-9 md:col-span-10 md:grid md:grid-cols-10 md:gap-6">
+                    <h3 className="text-2xl font-black leading-tight tracking-[-0.025em] md:col-span-4 md:text-3xl">{item.title}</h3>
+                    <p className="mt-4 max-w-2xl text-sm font-medium leading-7 text-black/60 md:col-span-6 md:mt-0 md:text-base">{item.description}</p>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="border-b border-white/10 py-20 md:py-24">
-          <div className="mb-14 grid gap-6 md:grid-cols-[.7fr_1.3fr] md:items-end">
-            <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#00A1D6]">03 / Skills</p>
-              <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{t.skillsTitle}</h2>
-            </div>
-            <p className="max-w-xl text-zinc-500 md:justify-self-end md:text-right">{t.skillsSubtitle}</p>
+        <section className="grid grid-cols-12 border-b border-black py-14 md:py-20">
+          <div className="col-span-12 mb-10 md:col-span-3 md:mb-0">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#00A1D6]">03 / Skills</div>
+            <h2 className="mt-3 max-w-[230px] text-4xl font-black leading-none tracking-[-0.045em] md:text-5xl">{t.skillsTitle}</h2>
           </div>
-          <div className="grid gap-10 md:grid-cols-3">
-            {t.skillGroups.map((group, i) => (
-              <motion.div key={group.title} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="border-t border-white/15 pt-6">
-                <div className="mb-5 text-sm font-semibold text-white">{group.title}</div>
-                <div className="flex flex-wrap gap-x-4 gap-y-3">
-                  {group.skills.map((skill) => <span key={skill} className="text-sm text-zinc-400">{skill}</span>)}
-                </div>
-              </motion.div>
-            ))}
+          <div className="col-span-12 md:col-span-9 md:border-l md:border-black md:pl-6">
+            <p className="mb-8 max-w-xl text-sm font-medium leading-6 text-black/55">{t.skillsSubtitle}</p>
+            <div className="border-t border-black">
+              {t.skillGroups.map((group, groupIndex) => (
+                <motion.div
+                  key={group.title}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: groupIndex * 0.05 }}
+                  className="grid grid-cols-12 border-b border-black py-6"
+                >
+                  <div className="col-span-12 mb-5 md:col-span-4 md:mb-0">
+                    <div className="text-[10px] font-black text-[#00A1D6]">0{groupIndex + 1}</div>
+                    <h3 className="mt-1 text-lg font-black">{group.title}</h3>
+                  </div>
+                  <div className="col-span-12 grid grid-cols-2 gap-x-5 gap-y-4 md:col-span-8 md:grid-cols-3">
+                    {group.skills.map((skill, skillIndex) => (
+                      <div key={skill} className="border-l border-black/25 pl-3 text-sm font-semibold">
+                        <span className="mr-2 text-[9px] text-black/35">{String(skillIndex + 1).padStart(2, '0')}</span>
+                        {skill}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="grid gap-10 py-20 md:grid-cols-[.8fr_1.2fr] md:py-24">
-          <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#00A1D6]">04 / Contact</p>
-            <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">{t.ctaTitle}</h2>
+        <section className="grid grid-cols-12 py-14 md:py-20">
+          <div className="col-span-12 md:col-span-3">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#00A1D6]">04 / Contact</div>
           </div>
-          <div>
-            <p className="max-w-2xl text-lg leading-8 text-zinc-400">{t.ctaSubtitle}</p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <a href="mailto:hanwenbo_job@163.com" className="group flex items-center justify-between gap-6 border-b border-white/20 py-3 text-white transition hover:border-[#00A1D6] sm:min-w-[280px]">
-                <span className="flex items-center gap-3"><Mail className="h-4 w-4 text-[#00A1D6]" />hanwenbo_job@163.com</span>
-                <ArrowUpRight className="h-4 w-4 text-zinc-500 transition group-hover:text-[#00A1D6]" />
+          <div className="col-span-12 mt-8 md:col-span-9 md:mt-0 md:border-l md:border-black md:pl-6">
+            <h2 className="max-w-4xl text-5xl font-black leading-[0.9] tracking-[-0.055em] md:text-7xl lg:text-8xl">{t.ctaTitle}</h2>
+            <p className="mt-8 max-w-2xl text-base font-medium leading-7 text-black/60 md:text-lg">{t.ctaSubtitle}</p>
+
+            <div className="mt-12 grid border-t border-black md:grid-cols-2">
+              <a
+                href="mailto:hanwenbo_job@163.com"
+                className="group flex min-h-[96px] items-center justify-between border-b border-black pr-4 transition hover:bg-black hover:px-4 hover:text-white md:border-r"
+              >
+                <span className="flex items-center gap-3 text-sm font-bold"><Mail className="h-4 w-4 text-[#00A1D6]" />hanwenbo_job@163.com</span>
+                <ArrowUpRight className="h-5 w-5" />
               </a>
-              <button onClick={() => setShowWechat(true)} className="group flex items-center justify-between gap-6 border-b border-white/20 py-3 text-left text-white transition hover:border-[#00A1D6] sm:min-w-[220px]">
-                <span className="flex items-center gap-3"><MessageCircle className="h-4 w-4 text-[#00A1D6]" />{t.wechatBtn}</span>
-                <ArrowUpRight className="h-4 w-4 text-zinc-500 transition group-hover:text-[#00A1D6]" />
+              <button
+                onClick={() => setShowWechat(true)}
+                className="group flex min-h-[96px] items-center justify-between border-b border-black pr-4 text-left transition hover:bg-black hover:px-4 hover:text-white md:pl-5"
+              >
+                <span className="flex items-center gap-3 text-sm font-bold"><MessageCircle className="h-4 w-4 text-[#00A1D6]" />{t.wechatBtn}</span>
+                <ArrowUpRight className="h-5 w-5" />
               </button>
             </div>
           </div>
         </section>
 
-        <footer className="flex flex-col gap-3 border-t border-white/10 py-8 text-xs text-zinc-600 sm:flex-row sm:items-center sm:justify-between">
-          <span>{t.footer}</span>
-          <span>Han Wenbo | Resume</span>
+        <footer className="grid grid-cols-12 border-t border-black py-5 text-[10px] font-bold uppercase tracking-[0.14em] text-black/45">
+          <span className="col-span-8">{t.footer}</span>
+          <span className="col-span-4 text-right">Swiss Grid / R-02</span>
         </footer>
       </main>
 
       <AnimatePresence>
         {showWechat && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm" onClick={() => setShowWechat(false)}>
-            <motion.div initial={{ opacity: 0, y: 14, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 14, scale: 0.98 }} onClick={(e) => e.stopPropagation()} className="relative w-full max-w-sm border border-white/10 bg-[#111318] p-8">
-              <button onClick={() => setShowWechat(false)} className="absolute right-4 top-4 text-zinc-500 transition hover:text-white"><X className="h-5 w-5" /></button>
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#00A1D6]">WeChat</div>
-              <h3 className="mt-2 text-2xl font-semibold text-white">Scan to connect</h3>
-              <div className="mt-7 bg-white p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4"
+            onClick={() => setShowWechat(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-sm border-2 border-black bg-[#f2f2ef] p-6 text-black"
+            >
+              <button onClick={() => setShowWechat(false)} className="absolute right-4 top-4 transition hover:text-[#00A1D6]">
+                <X className="h-5 w-5" />
+              </button>
+              <div className="text-[10px] font-black uppercase tracking-[0.22em] text-[#00A1D6]">WeChat / Contact</div>
+              <h3 className="mt-2 text-3xl font-black tracking-[-0.04em]">Scan to connect</h3>
+              <div className="mt-6 border-2 border-black bg-white p-3">
                 <img src="/wechat-qr.png" alt="WeChat QR Code" className="aspect-square w-full object-contain" />
               </div>
             </motion.div>
