@@ -132,7 +132,7 @@ export default function App() {
             <div className="relative w-64 md:w-80">
               <div className="absolute -left-4 -top-4 h-16 w-16 border-l border-t border-[#00A1D6]/70" />
               <div className="absolute -bottom-4 -right-4 h-16 w-16 border-b border-r border-white/20" />
-              <img src={PROFILE_URL} alt="Han Wenbo" className="aspect-[4/5] w-full object-cover grayscale-[18%]" />
+              <img src="/profile.jpg" alt="Han Wenbo" className="aspect-[4/5] w-full object-cover grayscale-[18%]" />
             </div>
           </motion.div>
         </section>
@@ -234,7 +234,7 @@ export default function App() {
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#00A1D6]">WeChat</div>
               <h3 className="mt-2 text-2xl font-semibold text-white">Scan to connect</h3>
               <div className="mt-7 bg-white p-4">
-                <img src={WECHAT_QR_URL} alt="WeChat QR Code" className="aspect-square w-full object-contain" />
+                <img src="/wechat-qr.png" alt="WeChat QR Code" className="aspect-square w-full object-contain" />
               </div>
             </motion.div>
           </motion.div>
